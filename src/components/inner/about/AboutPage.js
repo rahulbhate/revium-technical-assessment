@@ -3,7 +3,7 @@ import Data from 'components/common/Data.json'
 import { MetaDecorator } from 'components/common/MetaDecorator'
 import NavBar from 'components/common/NavBar'
 import React from 'react'
-import { Col, Container, Row, Spinner } from 'react-bootstrap'
+import { Col, Container, Row } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import LoadingIndicator from 'components/common/LoadingIndicator'
 export const AboutPage = ({ ...props }) => {
