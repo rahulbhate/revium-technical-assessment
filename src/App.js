@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import 'assets/css/style.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import Error404 from 'components/common/PageNotFound'
+import DashboardPage from 'components/inner/dashboard/DashboardPage'
+import ServicesPage from 'components/inner/services/ServicesPage'
+import AboutPage from 'components/inner/about/AboutPage'
+import React from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
-function App() {
+const App = ({ ...props }) => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Router>
+      <Switch>
+        <Route path="/" exact component={DashboardPage} />
+        <Route path="/about" component={AboutPage} />
+        <Route path="/services" component={ServicesPage} />
+        <Route path="/dashboard" component={DashboardPage} />
+        <Route component={Error404} />
+      </Switch>
+    </Router>
+  )
 }
-
-export default App;
+export default App
