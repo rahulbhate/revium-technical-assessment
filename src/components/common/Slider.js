@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import {
   faCircle,
   faArrowCircleLeft,
@@ -10,9 +10,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
     This component is used to display Carousel on Dashboard page.
   */
 }
+const delay = 3000
 const Slider = ({ slides, ...props }) => {
   const [current, setCurrent] = useState(0)
   const length = slides.length
+  const timeoutRef = useRef(null)
 
   const nextSlide = () => {
     setCurrent(current === length - 1 ? 0 : current + 1)
@@ -21,7 +23,25 @@ const Slider = ({ slides, ...props }) => {
   const prevSlide = () => {
     setCurrent(current === 0 ? length - 1 : current - 1)
   }
+  function resetTimeout() {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current)
+    }
+  }
+  useEffect(() => {
+    resetTimeout()
+    timeoutRef.current = setTimeout(
+      () =>
+        setCurrent((prevIndex) =>
+          prevIndex === slides.length - 1 ? 0 : prevIndex + 1
+        ),
+      delay
+    )
 
+    return () => {
+      resetTimeout()
+    }
+  }, [current])
   return (
     <>
       <div className="dashboard-carousel">
@@ -48,7 +68,12 @@ const Slider = ({ slides, ...props }) => {
                   <div className="dashboard-carousel-pagination">
                     {slides.map((slide, index) => {
                       return (
-                        <div key={slide.title} style={{ margin: '5px' }}>
+                        <div
+                          key={slide.title}
+                          style={{
+                            margin: '5px',
+                          }}
+                        >
                           {
                             <>
                               {index === current ? (

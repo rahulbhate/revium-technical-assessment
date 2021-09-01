@@ -248,6 +248,11 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  transition: all 1450ms;
+  -webkit-transition: all 1000s ease-in-out;
+  -moz-transition: all 1s ease-in-out;
+  -o-transition: all 1s ease-in-out;
+  transition: all 1s ease-in-out;
   background-image: linear-gradient(#e59a6a, #eb5a5e);
 }
 .dashboard-carousel-icons {
